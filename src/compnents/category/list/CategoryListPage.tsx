@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
 
 interface ICategoryItem {
@@ -10,6 +10,8 @@ interface ICategoryItem {
   description: string;
 }
 const CategoryListPage = () => {
+  const navigate = useNavigate();
+  
   const [list, setList] = useState<ICategoryItem[]>([]);
 
   const [showModal, setShowModal] = useState(false);
@@ -32,6 +34,7 @@ const CategoryListPage = () => {
         .then(() => {
           console.log("deleted!");
           setShowModal(false);
+          setList(list.filter(x=>x.id!==categoryIdToDelete));
         })
         .catch((error) => {
           console.error(error);
@@ -42,6 +45,7 @@ const CategoryListPage = () => {
 
   const closeModal = () => {
     setShowModal(false);
+
   };
 
   useEffect(() => {
