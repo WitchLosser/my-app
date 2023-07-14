@@ -3,6 +3,8 @@ import {Link} from "react-router-dom";
 import ModalDelete from "../../../common/ModalDelete";
 import http_common from "../../../../http_common";
 import {ICategoryItem} from "./types";
+import { toast } from "react-toastify";
+import { APP_ENV } from "../../../../env";
 
 
 const CategoryListPage = () => {
@@ -14,6 +16,8 @@ const CategoryListPage = () => {
             .then((resp) => {
                 console.log("Categories", resp.data);
                 setList(resp.data);
+                // toast.success("categories loaded");
+
             });
     }, []);
 
@@ -21,10 +25,12 @@ const CategoryListPage = () => {
         try {
             //console.log("Видаляємо категорію", id);
             await http_common.delete(`api/category/${id}`);
+            toast.warning("Category deleted!");
             setList(list.filter(x=>x.id!==id));
         }
         catch {
-            console.log("Помилка видалення");
+            toast.error('Error delete!');
+
         }
     }
 
@@ -49,7 +55,9 @@ const CategoryListPage = () => {
                             <tr key={c.id}>
                                 <th scope="row">{c.id}</th>
                                 <td>{c.name}</td>
-                                <td>{c.image}</td>
+                                <td>
+                                    <img src={`${APP_ENV.BASE_URL}uploads/150_${c.image}`} alt="фото" width={50}/>
+                                </td>
                                 <td>{c.description}</td>
                                 <td>
                                     <ModalDelete id={c.id} text={c.name} deleteFunc={onClickDelete}/>

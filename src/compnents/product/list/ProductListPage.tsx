@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import http_common from '../../../http_common';
 import { Carousel } from 'react-bootstrap';
 import { APP_ENV } from '../../../env';

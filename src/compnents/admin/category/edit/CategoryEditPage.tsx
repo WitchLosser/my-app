@@ -7,6 +7,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { ICategoryItem } from "../list/types";
 import defaultImage from "../../../../assets/default.jpg";
 import { APP_ENV } from "../../../../env";
+import { toast } from "react-toastify";
 
 const CategoryEditPage = () => {
   const navigate = useNavigate();
@@ -28,9 +29,10 @@ const CategoryEditPage = () => {
           "Content-Type": "multipart/form-data",
         },
       });
+      toast.success('Category Edited!');
       navigate("../..");
     } catch {
-      console.log("Server error");
+      toast.error('Server Error!');
     }
   };
 

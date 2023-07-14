@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import { ChangeEvent } from "react";
 import defaultImage from "../../../../assets/default.jpg";
 import http_common from "../../../../http_common";
-
+import { toast } from 'react-toastify';
 const CategoryCreatePage = () => {
   const navigate = useNavigate();
 
@@ -21,9 +21,10 @@ const CategoryCreatePage = () => {
           "Content-Type": "multipart/form-data",
         },
       });
+      toast.success('Category Added!');
       navigate("..");
     } catch {
-      console.log("Server error");
+      toast.error('Server Error!');
     }
   };
 
