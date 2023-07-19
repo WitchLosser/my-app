@@ -1,13 +1,16 @@
-import {combineReducers} from "redux";
+import {combineReducers, createStore} from "redux";
 import {configureStore} from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
-import { AuthReducer } from "../compnents/auth/AuthReducer";
+import { AuthReducer } from "./reducers/AuthReducer";
 import { IsLoadingReducer } from "./reducers/IsLoadingReducer";
+import { NotificationReducer } from "./reducers/NotificationReducer";
+
 
 
 export const rootReducer = combineReducers({
     auth: AuthReducer,
-    loading: IsLoadingReducer
+    loading: IsLoadingReducer,
+    notification: NotificationReducer,
 });
 
 export const store = configureStore({
@@ -15,3 +18,8 @@ export const store = configureStore({
     devTools: true,
     middleware: [thunk]
 });
+
+
+
+
+export default store;

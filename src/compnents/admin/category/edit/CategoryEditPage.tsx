@@ -8,7 +8,8 @@ import { ICategoryItem } from "../list/types";
 import defaultImage from "../../../../assets/default.jpg";
 import { APP_ENV } from "../../../../env";
 import { toast } from "react-toastify";
-
+import { store } from "../../../../store/store";
+import { NotificationActionTypes, NotificationSetMessage } from "../../../../store/reducers/NotificationReducer";
 const CategoryEditPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -29,6 +30,11 @@ const CategoryEditPage = () => {
           "Content-Type": "multipart/form-data",
         },
       });
+      const action: NotificationSetMessage = {
+        payload: "Category successfully edited",
+        type: NotificationActionTypes.SET_MESSAGE,
+      };
+      store.dispatch(action);
       toast.success('Category Edited!');
       navigate("../..");
     } catch {

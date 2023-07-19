@@ -5,6 +5,8 @@ import http_common from "../../../../http_common";
 import {ICategoryItem} from "./types";
 import { toast } from "react-toastify";
 import { APP_ENV } from "../../../../env";
+import { NotificationActionTypes, NotificationSetMessage } from "../../../../store/reducers/NotificationReducer";
+import store from "../../../../store/store";
 
 
 const CategoryListPage = () => {
@@ -17,6 +19,11 @@ const CategoryListPage = () => {
                 console.log("Categories", resp.data);
                 setList(resp.data);
                 // toast.success("categories loaded");
+                const action: NotificationSetMessage = {
+                    payload: "Categories Loaded",
+                    type: NotificationActionTypes.SET_MESSAGE,
+                  };
+                  store.dispatch(action);
 
             });
     }, []);

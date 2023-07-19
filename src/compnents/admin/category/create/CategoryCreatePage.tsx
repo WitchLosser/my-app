@@ -5,6 +5,8 @@ import { ChangeEvent } from "react";
 import defaultImage from "../../../../assets/default.jpg";
 import http_common from "../../../../http_common";
 import { toast } from 'react-toastify';
+import { NotificationActionTypes, NotificationSetMessage } from "../../../../store/reducers/NotificationReducer";
+import store from "../../../../store/store";
 const CategoryCreatePage = () => {
   const navigate = useNavigate();
 
@@ -21,7 +23,11 @@ const CategoryCreatePage = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      toast.success('Category Added!');
+      const action: NotificationSetMessage = {
+        payload: "Category Added!",
+        type: NotificationActionTypes.SET_MESSAGE,
+      };
+      store.dispatch(action);
       navigate("..");
     } catch {
       toast.error('Server Error!');

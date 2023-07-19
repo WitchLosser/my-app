@@ -1,5 +1,7 @@
 import { FC, useRef } from "react";
 import { Modal } from "bootstrap";
+import { NotificationActionTypes, NotificationSetMessage } from "../../store/reducers/NotificationReducer";
+import store from "../../store/store";
 
 interface Props {
   id: number;
@@ -23,6 +25,11 @@ const ModalDelete: FC<Props> = ({ id, text, deleteFunc }) => {
       const bsModal = Modal.getInstance(modal);
       bsModal?.hide();
       deleteFunc(id);
+      const action: NotificationSetMessage = {
+        payload: "Category successfully deleted",
+        type: NotificationActionTypes.SET_MESSAGE,
+      };
+      store.dispatch(action);
     }
   };
   return (
