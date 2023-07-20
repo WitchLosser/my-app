@@ -41,7 +41,7 @@ function App() {
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
           
-          {user?.role === "admin" && isAuth ? (
+          {/* {user?.role === "admin" && isAuth ? ( */}
             <Route path={"/admin"} element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
               <Route path="category">
@@ -52,9 +52,9 @@ function App() {
                 </Route>
               </Route>
             </Route>
-          ) : (
+          {/* ) : (
             <Route path="admin" element={<LoginPage />} />
-          )}
+          )} */}
         </Route>
       </Routes>
     </>
